@@ -1,10 +1,12 @@
-const CACHE_NAME = 'gemini-inventory-pro-v2';
+const CACHE_NAME = 'gemini-inventory-pro-v3';
 const APP_SHELL_URLS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icon-192.svg',
-  '/icon-512.svg'
+  '/icon-192.png',
+  '/icon-512.png',
+  '/screenshot-desktop.png',
+  '/screenshot-mobile.png'
 ];
 
 // Install the service worker and cache the app shell
