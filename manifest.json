@@ -1,7 +1,7 @@
 {
   "short_name": "Gemini Pro",
   "name": "Gemini Inventory Pro",
-  "id": "/gemini-inventory-pro/",
+  "id": ".",
   "description": "An intelligent inventory and product analysis tool. Scan QR codes, add items manually, and leverage Gemini AI to get detailed product information, comparisons, and answers to your questions. Includes file storage and chat history.",
   "start_url": ".",
   "display": "standalone",

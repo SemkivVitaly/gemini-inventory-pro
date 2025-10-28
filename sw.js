@@ -1,12 +1,12 @@
-const CACHE_NAME = 'gemini-inventory-pro-v4';
+const CACHE_NAME = 'gemini-inventory-pro-v5';
 const APP_SHELL_URLS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/screenshot-desktop.png',
-  '/screenshot-mobile.png'
+  './',
+  './index.html',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png',
+  './screenshot-desktop.png',
+  './screenshot-mobile.png'
 ];
 
 // Install the service worker and cache the app shell
@@ -15,7 +15,9 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('Opened cache and caching app shell');
-        return cache.addAll(APP_SHELL_URLS);
+        // Use relative paths for the request
+        const relativeUrls = APP_SHELL_URLS.map(url => new Request(url, { cache: 'reload' }));
+        return cache.addAll(relativeUrls);
       })
       .catch(err => console.error('App shell caching failed:', err))
   );
@@ -72,7 +74,7 @@ self.addEventListener('fetch', event => {
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)
-        .catch(() => caches.match('/')) // Fallback to the cached root page
+        .catch(() => caches.match('./')) // Fallback to the cached root page
     );
     return;
   }
