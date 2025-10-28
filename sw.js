@@ -1,36 +1,51 @@
-const CACHE_NAME = 'gemini-inventory-pro-v5';
-const APP_SHELL_URLS = [
+const CACHE_NAME = 'gemini-inventory-pro-v6';
+const PRECACHE_ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './vite.svg',
   './icon-192.png',
   './icon-512.png',
   './screenshot-desktop.png',
-  './screenshot-mobile.png'
+  './screenshot-mobile.png',
+  './index.tsx',
+  './App.tsx',
+  './types.ts',
+  './hooks/useLocalStorage.ts',
+  './services/geminiService.ts',
+  './components/Layout.tsx',
+  './components/Comparer.tsx',
+  './components/Chat.tsx',
+  './components/Files.tsx',
+  './components/History.tsx',
+  './components/QrScanner.tsx',
+  './components/icons.tsx',
+  './components/MarkdownRenderer.tsx',
+  './components/AnalysisModal.tsx',
+  './components/InstallPWA.tsx'
 ];
 
-// Install the service worker and cache the app shell
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Opened cache and caching app shell');
-        // Use relative paths for the request
-        const relativeUrls = APP_SHELL_URLS.map(url => new Request(url, { cache: 'reload' }));
-        return cache.addAll(relativeUrls);
+        console.log('[Service Worker] Pre-caching app assets');
+        return cache.addAll(PRECACHE_ASSETS);
       })
-      .catch(err => console.error('App shell caching failed:', err))
+      .catch(error => {
+        console.error('[Service Worker] Pre-caching failed:', error);
+      })
   );
+  self.skipWaiting();
 });
 
-// Clean up old caches on activation
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
-            console.log('Deleting old cache:', cacheName);
+            console.log('[Service Worker] Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
@@ -40,14 +55,12 @@ self.addEventListener('activate', event => {
   return self.clients.claim();
 });
 
-// Serve from cache, fallback to network, and update cache
 self.addEventListener('fetch', event => {
-  // We only want to handle GET requests.
   if (event.request.method !== 'GET') {
     return;
   }
-  
-  // For requests to external resources (CDNs), use a "stale-while-revalidate" strategy
+
+  // Stale-while-revalidate for CDN resources
   const isCdnUrl = event.request.url.startsWith('https://aistudiocdn.com/') || 
                    event.request.url.startsWith('https://cdn.tailwindcss.com') ||
                    event.request.url.startsWith('https://unpkg.com');
@@ -61,7 +74,7 @@ self.addEventListener('fetch', event => {
               cache.put(event.request, networkResponse.clone());
             }
             return networkResponse;
-          }).catch(err => console.error('Fetch failed for CDN resource:', event.request.url, err));
+          }).catch(err => console.error('[Service Worker] Fetch failed for CDN:', event.request.url, err));
           
           return response || fetchPromise;
         });
@@ -70,19 +83,12 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // For navigation requests, use network-first to ensure fresh content, fallback to cache.
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request)
-        .catch(() => caches.match('./')) // Fallback to the cached root page
-    );
-    return;
-  }
-
-  // For local assets (app shell), use cache-first
+  // Cache-first for local assets
   event.respondWith(
     caches.match(event.request)
       .then(response => {
+        // If we have a response in the cache, return it.
+        // Otherwise, fetch from the network.
         return response || fetch(event.request);
       })
   );
