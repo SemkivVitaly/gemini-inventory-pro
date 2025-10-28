@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gemini-inventory-pro-v3';
+const CACHE_NAME = 'gemini-inventory-pro-v4';
 const APP_SHELL_URLS = [
   '/',
   '/index.html',
