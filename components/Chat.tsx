@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChatMessage } from '../types';
-import { chat } from '../services/geminiService';
-import { SendIcon, SearchIcon, UserIcon, BotIcon } from './icons';
-import MarkdownRenderer from './MarkdownRenderer';
+import { ChatMessage } from '../types.ts';
+import { chat } from '../services/geminiService.ts';
+import { SendIcon, SearchIcon, UserIcon, BotIcon } from './icons.tsx';
+import MarkdownRenderer from './MarkdownRenderer.tsx';
 
 interface ChatProps {
   chatHistory: ChatMessage[];

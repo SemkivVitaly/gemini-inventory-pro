@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Product, Analysis, SingleProductAnalysis, ComparisonAnalysis } from '../types';
-import { analyzeSingleProduct, compareProducts } from '../services/geminiService';
-import { DeleteIcon, QrCodeIcon, SparklesIcon } from './icons';
-import QrScanner from './QrScanner';
-import AnalysisModal from './AnalysisModal';
+import { Product, Analysis, SingleProductAnalysis, ComparisonAnalysis } from '../types.ts';
+import { analyzeSingleProduct, compareProducts } from '../services/geminiService.ts';
+import { DeleteIcon, QrCodeIcon, SparklesIcon } from './icons.tsx';
+import QrScanner from './QrScanner.tsx';
+import AnalysisModal from './AnalysisModal.tsx';
 
 interface ComparerProps {
   products: Product[];

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { DownloadIcon } from './icons';
+import { DownloadIcon } from './icons.tsx';
 
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: Array<string>;

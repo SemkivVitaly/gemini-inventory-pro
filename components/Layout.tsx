@@ -1,7 +1,7 @@
 import React from 'react';
-import { View } from '../types';
-import { ComparerIcon, ChatIcon, FilesIcon, HistoryIcon } from './icons';
-import InstallPWA from './InstallPWA';
+import { View } from '../types.ts';
+import { ComparerIcon, ChatIcon, FilesIcon, HistoryIcon } from './icons.tsx';
+import InstallPWA from './InstallPWA.tsx';
 
 interface LayoutProps {
   activeView: View;

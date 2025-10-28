@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Analysis } from '../types';
-import { EyeIcon, HistoryIcon } from './icons';
-import AnalysisModal from './AnalysisModal';
+import { Analysis } from '../types.ts';
+import { EyeIcon, HistoryIcon } from './icons.tsx';
+import AnalysisModal from './AnalysisModal.tsx';
 
 interface HistoryProps {
   analysisHistory: Analysis[];

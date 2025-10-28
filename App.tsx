@@ -1,12 +1,12 @@
 
 import React, { useState } from 'react';
-import { View, Product, ChatMessage, Analysis, StoredFile } from './types';
-import { useLocalStorage } from './hooks/useLocalStorage';
-import Layout from './components/Layout';
-import Comparer from './components/Comparer';
-import Chat from './components/Chat';
-import Files from './components/Files';
-import History from './components/History';
+import { View, Product, ChatMessage, Analysis, StoredFile } from './types.ts';
+import { useLocalStorage } from './hooks/useLocalStorage.ts';
+import Layout from './components/Layout.tsx';
+import Comparer from './components/Comparer.tsx';
+import Chat from './components/Chat.tsx';
+import Files from './components/Files.tsx';
+import History from './components/History.tsx';
 
 const App: React.FC = () => {
   const [activeView, setActiveView] = useState<View>(View.Comparer);

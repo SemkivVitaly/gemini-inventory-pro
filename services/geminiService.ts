@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { SingleProductAnalysis, ComparisonAnalysis } from '../types';
+import { SingleProductAnalysis, ComparisonAnalysis } from '../types.ts';
 
 // Assume process.env.API_KEY is available in the execution environment
 const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY as string });

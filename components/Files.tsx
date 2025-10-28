@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { StoredFile } from '../types';
-import { analyzeFileContent } from '../services/geminiService';
-import { FileIcon, DeleteIcon, SparklesIcon, EyeIcon, UploadIcon } from './icons';
-import MarkdownRenderer from './MarkdownRenderer';
+import { StoredFile } from '../types.ts';
+import { analyzeFileContent } from '../services/geminiService.ts';
+import { FileIcon, DeleteIcon, SparklesIcon, EyeIcon, UploadIcon } from './icons.tsx';
+import MarkdownRenderer from './MarkdownRenderer.tsx';
 
 interface FilesProps {
   files: StoredFile[];

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { SingleProductAnalysis, ComparisonAnalysis, Technology } from '../types';
-import { CloseIcon, SparklesIcon } from './icons';
-import MarkdownRenderer from './MarkdownRenderer';
+import { SingleProductAnalysis, ComparisonAnalysis, Technology } from '../types.ts';
+import { CloseIcon, SparklesIcon } from './icons.tsx';
+import MarkdownRenderer from './MarkdownRenderer.tsx';
 
 interface AnalysisModalProps {
   analysisData: SingleProductAnalysis | ComparisonAnalysis;
