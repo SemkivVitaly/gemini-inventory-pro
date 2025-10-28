@@ -155,7 +155,7 @@ const Comparer: React.FC<ComparerProps> = ({ products, setProducts, setAnalysisH
 
       {/* Right Panel: Analysis Result */}
       <div className="md:w-2/3 flex flex-col bg-slate-800/50 rounded-lg border border-slate-700/50">
-        <h2 className="text-2xl font-bold p-4 border-b border-slate-700 text-slate-300">Анализ от AI</h2>
+        <h2 className="text-2xl font-bold p-4 border-b border-slate-700 text-slate-300">Анализ ИИ</h2>
         <div className="p-4 flex-grow overflow-y-auto flex justify-center items-center">
             {error && <div className="text-red-400 bg-red-500/10 p-4 rounded-md">{error}</div>}
             {!isLoading && !error && (

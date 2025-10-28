@@ -37,7 +37,7 @@ const History: React.FC<HistoryProps> = ({ analysisHistory }) => {
                                 className="flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold py-2 px-3 rounded-md transition-colors"
                             >
                                 <EyeIcon className="h-5 w-5" />
-                                <span>Посмотреть</span>
+                                <span>Просмотр</span>
                             </button>
                         </div>
                     ))}

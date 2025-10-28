@@ -21,7 +21,7 @@ const base64ToText = (base64: string) => {
     try {
         return atob(base64);
     } catch(e) {
-        return "Невозможно отобразить бинарный контент.";
+        return "Не удается отобразить двоичное содержимое.";
     }
 };
 

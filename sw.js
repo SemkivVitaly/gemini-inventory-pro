@@ -1,28 +1,28 @@
-const CACHE_NAME = 'gemini-inventory-pro-v6';
+const CACHE_NAME = 'gemini-inventory-pro-v9';
 const PRECACHE_ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './vite.svg',
-  './icon-192.png',
-  './icon-512.png',
-  './screenshot-desktop.png',
-  './screenshot-mobile.png',
-  './index.tsx',
-  './App.tsx',
-  './types.ts',
-  './hooks/useLocalStorage.ts',
-  './services/geminiService.ts',
-  './components/Layout.tsx',
-  './components/Comparer.tsx',
-  './components/Chat.tsx',
-  './components/Files.tsx',
-  './components/History.tsx',
-  './components/QrScanner.tsx',
-  './components/icons.tsx',
-  './components/MarkdownRenderer.tsx',
-  './components/AnalysisModal.tsx',
-  './components/InstallPWA.tsx'
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/vite.svg',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/screenshot-desktop.png',
+  '/screenshot-mobile.png',
+  '/index.tsx',
+  '/App.tsx',
+  '/types.ts',
+  '/hooks/useLocalStorage.ts',
+  '/services/geminiService.ts',
+  '/components/Layout.tsx',
+  '/components/Comparer.tsx',
+  '/components/Chat.tsx',
+  '/components/Files.tsx',
+  '/components/History.tsx',
+  '/components/QrScanner.tsx',
+  '/components/icons.tsx',
+  '/components/MarkdownRenderer.tsx',
+  '/components/AnalysisModal.tsx',
+  '/components/InstallPWA.tsx'
 ];
 
 self.addEventListener('install', event => {
@@ -89,7 +89,7 @@ self.addEventListener('fetch', event => {
       .then(response => {
         // If we have a response in the cache, return it.
         // Otherwise, fetch from the network.
-        return response || fetch(event.request);
+        return response || fetch(event.request).catch(() => caches.match('/'));
       })
   );
 });

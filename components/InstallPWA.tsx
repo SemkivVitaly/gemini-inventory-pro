@@ -33,9 +33,9 @@ const InstallPWA: React.FC = () => {
     await installPrompt.prompt();
     const { outcome } = await installPrompt.userChoice;
     if (outcome === 'accepted') {
-      console.log('User accepted the install prompt');
+      console.log('Пользователь принял приглашение на установку');
     } else {
-      console.log('User dismissed the install prompt');
+      console.log('Пользователь отклонил приглашение на установку');
     }
     setInstallPrompt(null);
   };

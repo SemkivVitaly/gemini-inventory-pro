@@ -147,7 +147,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({ analysisData, onClose }) 
           </div>
 
           <div className="mt-6 p-4 bg-slate-900/50 rounded-lg">
-            <h3 className="font-bold text-lg mb-2 text-teal-400 flex items-center gap-2"><SparklesIcon className="h-5 w-5"/> Выводы</h3>
+            <h3 className="font-bold text-lg mb-2 text-teal-400 flex items-center gap-2"><SparklesIcon className="h-5 w-5"/> Резюме</h3>
             <MarkdownRenderer content={analysisData.summary} />
           </div>
         </main>

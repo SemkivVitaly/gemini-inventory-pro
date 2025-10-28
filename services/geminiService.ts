@@ -71,7 +71,7 @@ const comparisonSchema = {
 
 export const analyzeSingleProduct = async (productName: string): Promise<SingleProductAnalysis> => {
     const ai = getAI();
-    const prompt = `Проведи исчерпывающий анализ продукта "${productName}" на русском языке. КРИТИЧЕСКИ ВАЖНО: при определении параметра "Страна производителя", будь предельно точным и ОБЯЗАТЕЛЬНО учитывай указанную модель продукта (например, "iPhone 15 Pro Max", а не просто "iPhone"), так как места производства могут отличаться. Результат верни СТРОГО в формате JSON по указанной схеме. В массив 'parameters' ОБЯЗАТЕЛЬНО включи параметр с 'name': 'Технологии', где 'value' будет содержать список ключевых технологий через запятую (например: "Технология 1, Технология 2"). Отдельный массив 'technologies' в корне JSON также ДОЛЖЕН БЫТЬ заполнен подробными описаниями для каждой упомянутой технологии. Поле 'technologies' не должно быть пустым.`;
+    const prompt = `Проведи всесторонний анализ продукта "${productName}". КРИТИЧЕСКИ ВАЖНО: При определении параметра "Страна производитель", будь предельно точным и ОБЯЗАТЕЛЬНО учитывай указанную модель продукта (например, "iPhone 15 Pro Max", а не просто "iPhone"), так как места производства могут отличаться. Верни результат СТРОГО в формате JSON согласно предоставленной схеме. В массиве 'parameters' ты ДОЛЖЕН включить параметр с 'name': 'Технологии', где 'value' будет содержать список ключевых технологий через запятую (например, "Технология 1, Технология 2"). Отдельный массив 'technologies' в корне JSON также ДОЛЖЕН быть заполнен подробными описаниями для каждой упомянутой технологии. Поле 'technologies' не должно быть пустым.`;
 
     try {
         const response = await ai.models.generateContent({
@@ -85,14 +85,14 @@ export const analyzeSingleProduct = async (productName: string): Promise<SingleP
         });
         return JSON.parse(response.text) as SingleProductAnalysis;
     } catch (error) {
-        console.error("Error analyzing single product:", error);
+        console.error("Ошибка при анализе одного продукта:", error);
         throw new Error("Не удалось проанализировать продукт. Пожалуйста, попробуйте еще раз.");
     }
 };
 
 export const compareProducts = async (productNames: string[]): Promise<ComparisonAnalysis> => {
     const ai = getAI();
-    const prompt = `Пожалуйста, предоставь всеобъемлющее сравнение следующих продуктов: ${productNames.join(', ')} на русском языке. КРИТИЧЕСКИ ВАЖНО: при определении "Страны производителя" для каждого товара, будь предельно точным и ОБЯЗАТЕЛЬНО учитывай конкретную модель продукта, если она указана. Верни результат СТРОГО в формате JSON по указанной схеме. В массив 'parameters' ОБЯЗАТЕЛЬНО включи параметр с 'name': 'Технологии'. Для этого параметра, в массиве 'values', поле 'value' для каждого продукта должно содержать список его ключевых технологий через запятую. Отдельный массив 'technologies' в корне JSON также ДОЛЖЕН БЫТЬ заполнен подробными описаниями для каждой технологии, упомянутой в сравнении. Поле 'technologies' не должно быть пустым. Для каждого другого параметра, в массиве 'values' укажи значение для каждого продукта и установи 'isBest' в 'true' для лучшего значения.`;
+    const prompt = `Пожалуйста, предоставь всестороннее сравнение следующих продуктов: ${productNames.join(', ')}. КРИТИЧЕСКИ ВАЖНО: При определении "Страны производителя" для каждого элемента, будь предельно точным и ОБЯЗАТЕЛЬНО учитывай конкретную модель продукта, если она указана. Верни результат СТРОГО в формате JSON согласно предоставленной схеме. В массиве 'parameters' ты ДОЛЖЕН включить параметр с 'name': 'Технологии'. Для этого параметра, в массиве 'values', поле 'value' для каждого продукта должно содержать список его ключевых технологий через запятую. Отдельный массив 'technologies' в корне JSON также ДОЛЖЕН быть заполнен подробными описаниями для каждой технологии, упомянутой в сравнении. Поле 'technologies' не должно быть пустым. Для каждого другого параметра, в массиве 'values', укажи значение для каждого продукта и установи 'isBest' в 'true' для лучшего значения.`;
 
     try {
         const response = await ai.models.generateContent({
@@ -107,21 +107,20 @@ export const compareProducts = async (productNames: string[]): Promise<Compariso
         const result = JSON.parse(response.text) as Omit<ComparisonAnalysis, 'productNames'>;
         return { ...result, productNames: productNames };
     } catch (error) {
-        console.error("Error comparing products:", error);
+        console.error("Ошибка при сравнении продуктов:", error);
         throw new Error("Не удалось сравнить продукты. Пожалуйста, попробуйте еще раз.");
     }
 };
 
 export const chat = async (prompt: string, useSearch: boolean) => {
     const ai = getAI();
-    const fullPrompt = `${prompt}. Отвечай на русском языке.`;
     try {
         const model = useSearch ? 'gemini-2.5-flash' : 'gemini-flash-lite-latest';
         const config = useSearch ? { tools: [{googleSearch: {}}] } : {};
 
         const response = await ai.models.generateContent({
             model: model,
-            contents: fullPrompt,
+            contents: prompt,
             config: config,
         });
 
@@ -132,22 +131,22 @@ export const chat = async (prompt: string, useSearch: boolean) => {
         return { text, sources };
 
     } catch (error) {
-        console.error("Error during chat:", error);
-        return { text: "Извините, произошла ошибка. Пожалуйста, попробуйте снова.", sources: [] };
+        console.error("Ошибка во время чата:", error);
+        return { text: "Извините, произошла ошибка. Пожалуйста, попробуйте еще раз.", sources: [] };
     }
 };
 
 export const analyzeFileContent = async (content: string, fileName: string): Promise<string> => {
     const ai = getAI();
     try {
-        const prompt = `Проанализируй следующее содержимое из файла "${fileName}" и ответь на русском языке:\n\n---\n\n${content}\n\n---\n\nПожалуйста, предоставь краткое содержание и выдели ключевые идеи.`;
+        const prompt = `Проанализируй следующее содержимое из файла "${fileName}":\n\n---\n\n${content}\n\n---\n\nПожалуйста, предоставь краткое резюме и выдели ключевые идеи.`;
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-pro',
             contents: prompt,
         });
         return response.text;
     } catch (error) {
-        console.error("Error analyzing file content:", error);
-        return "Извините, не удалось проанализировать содержимое файла.";
+        console.error("Ошибка при анализе содержимого файла:", error);
+        return "К сожалению, не удалось проанализировать содержимое файла.";
     }
 }

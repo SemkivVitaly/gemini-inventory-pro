@@ -48,10 +48,10 @@ const Chat: React.FC<ChatProps> = ({ chatHistory, setChatHistory }) => {
   return (
     <div className="flex flex-col h-full bg-slate-800/50 rounded-lg border border-slate-700/50">
       <div className="p-4 border-b border-slate-700 flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-slate-300">AI Чат</h2>
+        <h2 className="text-2xl font-bold text-slate-300">Чат с ИИ</h2>
         <div className="flex items-center gap-2">
             <label htmlFor="use-search-toggle" className="text-sm text-slate-400">
-                Искать в сети
+                Поиск в интернете
             </label>
             <button onClick={() => setUseSearch(!useSearch)} className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors ${useSearch ? 'bg-teal-500' : 'bg-slate-600'}`}>
                 <span className={`inline-block w-4 h-4 transform bg-white rounded-full transition-transform ${useSearch ? 'translate-x-6' : 'translate-x-1'}`} />

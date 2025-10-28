@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ activeView, setActiveView, children }) 
       <nav className="fixed bottom-0 md:relative w-full md:w-64 bg-slate-800/50 backdrop-blur-sm border-t md:border-t-0 md:border-r border-slate-700 z-10">
         <div className="p-4 hidden md:block">
           <h1 className="text-2xl font-bold text-teal-400">Gemini Pro</h1>
-          <p className="text-slate-400 text-sm">Инвентарный Помощник</p>
+          <p className="text-slate-400 text-sm">Ассистент Инвентаря</p>
         </div>
         <ul className="flex justify-around md:flex-col md:p-2">
           {navItems.map((item) => (

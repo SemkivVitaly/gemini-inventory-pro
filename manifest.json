@@ -1,22 +1,22 @@
 {
   "short_name": "Gemini Pro",
   "name": "Gemini Inventory Pro",
-  "id": ".",
+  "id": "/",
   "description": "An intelligent inventory and product analysis tool. Scan QR codes, add items manually, and leverage Gemini AI to get detailed product information, comparisons, and answers to your questions. Includes file storage and chat history.",
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0f172a",
   "theme_color": "#14b8a6",
   "icons": [
     {
-      "src": "./icon-192.png",
+      "src": "/icon-192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "./icon-512.png",
+      "src": "/icon-512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
@@ -24,13 +24,13 @@
   ],
   "screenshots": [
     {
-      "src": "./screenshot-desktop.png",
+      "src": "/screenshot-desktop.png",
       "sizes": "1280x720",
       "type": "image/png",
       "label": "Gemini Inventory Pro Desktop View"
     },
     {
-      "src": "./screenshot-mobile.png",
+      "src": "/screenshot-mobile.png",
       "sizes": "540x720",
       "type": "image/png",
       "label": "Gemini Inventory Pro Mobile View"
